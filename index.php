@@ -45,7 +45,6 @@ if (isset($signedRequest['app_data'])) {
         <script src="js/pageControl.js" /></script>
 </head>
 <body style="background:<?php echo $color ?>">
-    NEW
     <a href="<?php echo PAGE_URL ?>&app_data=color|red" target="_top">CHANGE BACKGROUND</a>
     <?php
     if (!isset($signedRequest['page'])) {
@@ -82,8 +81,10 @@ if (isset($signedRequest['app_data'])) {
         
         var pageControlObj;
         $('document').ready(function() {
+            //make an instance of the Object pageControl in the file js/pageControl.js
             pageControlObj = new pageControl();
         });
+        
         /**
          * load the all.js from the javscript facebook sdk asynchronusly
          */

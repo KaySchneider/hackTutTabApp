@@ -52,8 +52,6 @@ baseMethod = function (namespace) {
 }
 
 var facebookHelper = function(namespace) {
-    //this.prototype = new snipFrameBaseMethod()
-    // addParent(this, snipFrameBaseMethod);  
     this.user_authorized = '';
     this.signed_request = '';
     this.authMethod = 'new';
@@ -64,7 +62,10 @@ var facebookHelper = function(namespace) {
     this.authResponse = false;
     this.callBack = false;
     this.observerObjects = new Array();
-   
+    /**
+     *checks if the facebook Obj is avaiable,
+     *if it is avaiable, set fbIsOn = true, and load the user details from facebook
+     */
     this.checkFacebook();
 }
 
@@ -87,9 +88,9 @@ facebookHelper.prototype.checkAppPerms = function (callbackTrue,callbackFalse) {
         FB.getLoginStatus(function(response) {
             //the user is connected with the app
             if (response.status === 'connected') {
-                fbHelper.accessToken = response.authResponse.accessToken;
-                fbHelper.userId = response.authResponse.userID;
-                fbHelper.getUserData();
+                fbHelper.accessToken = response.authResponse.accessToken;//set the accessToken
+                fbHelper.userId = response.authResponse.userID;//set the userId
+                fbHelper.getUserData();//set the user Details
                 window.userCheck = true;
                 return true;
             } else if (response.status === 'not_authorized') {
@@ -119,12 +120,12 @@ facebookHelper.prototype.authorize = function(function_yes, function_no)
          * a new tab
          */
         FB.getLoginStatus(function(response) {
-            console.log(response);
+          
             if (response.authResponse) {
-                console.log(response);
-                fbHelper.userId = response.authResponse.userID;
-                fbHelper.accessToken = response.authResponse.accessToken;
-                fbHelper.signed_request = response.authResponse.signedRequest;
+           
+                fbHelper.userId = response.authResponse.userID;//set the userId
+                fbHelper.accessToken = response.authResponse.accessToken;//set the accessToken
+                fbHelper.signed_request = response.authResponse.signedRequest;//set the signedRequest
                 window.userCheck = true;
                 // logged in and connected user, someone you know
                 function_yes();
@@ -151,9 +152,9 @@ facebookHelper.prototype.doAuth = function (function_yes,function_no) {
         FB.login(function(response) {
             if (response.authResponse) {
                 window.userCheck = true;
-                fbHelper.userId = response.authResponse.userID;
-                fbHelper.accessToken = response.authResponse.accessToken;
-                fbHelper.signed_request = response.authResponse.signedRequest;
+                fbHelper.userId = response.authResponse.userID; //set the userId in the object
+                fbHelper.accessToken = response.authResponse.accessToken;//set tje accessToken 
+                fbHelper.signed_request = response.authResponse.signedRequest;//set the signedRequest
                 fbHelper.sendLoginChangesEvent(response);
                 function_yes();
             } else {
@@ -165,7 +166,7 @@ facebookHelper.prototype.doAuth = function (function_yes,function_no) {
 
 /**
  *checks if the facebook Obj is avaiable,
- *if it is avaiable, set fbIsOn = true
+ *if it is avaiable, set fbIsOn = true, and load the user details from facebook
  */
 facebookHelper.prototype.checkFacebook = function () {
     (function (fbHelperObj) {
@@ -185,6 +186,9 @@ facebookHelper.prototype.setFacebookOn = function () {
     
 }
 
+/**
+ * send the changes to the receiver when the login state changes
+ */
 facebookHelper.prototype.sendLoginChangesEvent = function (response) {
     var max = this.observerObjects.length;
     max  = max-1;
@@ -232,7 +236,6 @@ facebookHelper.prototype.getUserData = function () {
    
     (function (fbHelper) {
         FB.api('/me?access_token=' + this.accessToken , function(response) {
-            console.log(response);
             fbHelper.userData = response;
         });
     })(this);
@@ -247,13 +250,12 @@ facebookHelper.prototype.getUserId = function () {
 }
 
 /**
- *
+ * check if the user is connected to the app
  */
 facebookHelper.prototype.checkAppAuth = function () {
-    console.log(this.accessToken,this);
+  
     if (this.fbIsOn == false) {
         console.log("facebook isnt ready, please wait until it`s done");
-        return 'hu';
     } else if(this.accessToken == false ) {
        return false;
     } else {

@@ -46,6 +46,7 @@ pageControl.prototype.getSignedRequest = function () {
             mode:'getSignedRequest',
             signed_request:signedRequest 
         };
+   
         $.ajax({
             type: "POST",
             url: "ajax.php",
@@ -77,6 +78,7 @@ pageControl.prototype.getParsedRequest = function () {
  */
 pageControl.prototype.addEvents = function () {
     $('#askPermissions').click(function () {
+        //show the facebook Authorize dialog when the user click on this element
         facebookHelper.authorize(yes,no);
     });
    
