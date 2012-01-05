@@ -273,5 +273,15 @@ facebookHelper.prototype.getUserName = function () {
     return this.userData.first_name;
 }
 
+/**
+ * getter for the userName
+ */    
+facebookHelper.prototype.getAccessToken = function () {
+    if(this.accessToken == false) {
+        return false;
+    }
+    return this.accessToken;
+}
+
 
 facebookHelper = new facebookHelper(['facebookHelper']);

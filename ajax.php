@@ -24,7 +24,6 @@ $config['secret'] = APP_SECRET;
 $facebook = new Facebook($config);
 //get the data of the signed request from facebook sdk 
 $signedRequest = $facebook->getSignedRequest();
-
 if(!isset($_POST['mode'])) {
     die("nothing to do");
 }

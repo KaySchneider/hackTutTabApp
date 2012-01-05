@@ -96,5 +96,7 @@ if (isset($signedRequest['app_data'])) {
         }()); 
           
     </script>
+    <a href="https://github.com/KaySchneider/hackTutTabApp">View the app Source Code on github</a> <br/>
+    <a href="http://hackthegraph.blogspot.com/2012/01/facebook-tab-app-tutorial.html">View the tutorial written in german</a>
 </body>
 </html>

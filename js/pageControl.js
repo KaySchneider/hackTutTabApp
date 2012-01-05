@@ -44,7 +44,8 @@ pageControl.prototype.getSignedRequest = function () {
     (function(pCObj){
         var dataString = { 
             mode:'getSignedRequest',
-            signed_request:signedRequest 
+            signed_request:signedRequest
+         
         };
    
         $.ajax({
